@@ -31,6 +31,8 @@ const ClientSchema = new Schema({
 
 const Client = mongoose.model("Client", ClientSchema);
 
+app.use(express.json());
+
 app.get("/client", (req, res) => {
   Client.find({}, (err, result) => {
     if (err) {
