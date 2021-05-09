@@ -76,3 +76,6 @@ app.delete("/client", (req, res) => {
     return res.status(200).json({ message: "Client deleted sucessfully" });
   });
 });
+
+app.listen(process.env.PORT || 5600);
+console.log("server is running");
