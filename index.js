@@ -44,9 +44,9 @@ app.get("/client", (req, res) => {
 app.post("/", (req, res) => {
   Client.insertMany(
     {
-      name = req.body.name,
-      email = req.body.email,
-      country = req.body.country,
+      name: req.body.name,
+      email: req.body.email,
+      country: req.body.country,
     },
     (err, result) => {
       if (err)
