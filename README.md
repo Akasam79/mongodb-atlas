@@ -16,7 +16,7 @@
 
 
 
-* The POST route takes in name, email and country as parameter to be sent in the format as given below
+### The POST route takes in name, email and country as parameter to be sent in the format as given below
 * format for POST request
 # code block 
 {
@@ -28,7 +28,7 @@
 
 
 
-* The PUT route takes in the client's id as part of request params i.e :id = user_id and any other parameter that needs to be updated should be passed in the request body
+### The PUT route takes in the client's id as part of request params i.e :id = user_id and any other parameter that needs to be updated should be passed in the request body
 * format for PUT request
 # code block 
 
@@ -41,4 +41,4 @@
 
 
 
-* the DELETE route takes the client id as part of request params as in the PUT request but doesnt take any other parameter
+### the DELETE route takes the client id as part of request params as in the PUT request but doesnt take any other parameter
