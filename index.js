@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const connectionString = process.env.MONGODB_URI;
+// const connectionString = "mongodb://localhost:27017/users";
 
 mongoose.connect(
   connectionString,
@@ -55,27 +56,29 @@ app.post("/", (req, res) => {
         return res.status(500).json({ message: "Internal Server error" });
       return res
         .status(200)
-        .json({ message: "New client added successfully" + result });
+        .json({ message: "New client added successfully", data: result[0] });
     }
   );
 });
 
-app.put("/client", (req, res) => {
-  var user_id = req.body.id;
+var path = "/client/:id";
+app.put(path, (req, res) => {
   var clientUpdates = {
     name: req.body.name,
     email: req.body.email,
     country: req.body.country,
   };
-  Client.findByIdAndUpdate(user_id, clientUpdates, (err, result) => {
+
+  var id = req.params.id;
+  Client.findByIdAndUpdate(id, clientUpdates, (err, result) => {
     if (err) return res.status(500).json({ message: "Internal Server error" });
     return res.status(200).json({ message: "Data updated sucessfully" });
   });
 });
 
-app.delete("/client", (req, res) => {
-  var user_id = req.body.id;
-  Client.findByIdAndDelete(user_id, (err, result) => {
+app.delete(path, (req, res) => {
+  var id = req.params.id;
+  Client.findByIdAndDelete(id, (err, result) => {
     if (err) return res.status(500).json({ message: "Internal server error" });
     return res.status(200).json({ message: "Client deleted sucessfully" });
   });
