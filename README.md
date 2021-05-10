@@ -28,7 +28,6 @@
 
 ### The PUT route takes in the client's id as part of request params i.e :id = user_id and any other parameter that needs to be updated should be passed in the request body
 * format for PUT request
-# code block 
 
 {
     "name": "client's_name",
