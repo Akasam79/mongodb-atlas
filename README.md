@@ -17,8 +17,8 @@
 
 
 * The POST route takes in name, email and country as parameter to be sent in the format as given below
-# code block 
 * format for POST request
+# code block 
 {
     "name": "client's_name",
     "email": "client's_email",
@@ -29,8 +29,9 @@
 
 
 * The PUT route takes in the client's id as part of request params i.e :id = user_id and any other parameter that needs to be updated should be passed in the request body
-# code block 
 * format for PUT request
+# code block 
+
 {
     "name": "client's_name",
     "email": "client's_email",
