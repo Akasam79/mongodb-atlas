@@ -1,35 +1,35 @@
 # mongodb-atlas
 
-## Routes
-## Expected payloads(Json)
+* P.S : All expected payloads are in JSON format
 
-* GET Route : https://mongodb-task.herokuapp.com/client
+
+## Routes
+
+* GET Route : https://mongodb-task.herokuapp.com/clients
 
 * POST route : https://mongodb-task.herokuapp.com/
-# code block 
+
+* PUT route : https://mongodb-task.herokuapp.com/client/:id
+
+* DELETE route : https://mongodb-task.herokuapp.com/client/:id
+
+
+* The POST route takes in name, email and country as parameter to be sent in the format as given below
+# code block : format for POST request
 {
     "name": "client's_name",
     "email": "client's_email",
     "country": "client's_country"
 }
 
-* The POST route takes in name, email and country as parameter to be sent in the format as given above
 
-* PUT route : https://mongodb-task.herokuapp.com/client
-# code block 
+* The PUT route takes in the client's id as part of request params i.e :id = user_id and any other parameter that needs to be updated should be passed in the request body
+# code block : format for PUT request
 {
-    "id": "client's_id",
     "name": "client's_name",
     "email": "client's_email",
     "country": "client's_country"
 }
 
-* The put route takes in the client's id, and any other parameter that needs to be updated as parameters
 
-* DELETE route : https://mongodb-task.herokuapp.com/client
-# code block 
-{
-    "id": "client's_id"
-}
-
-* DELETE route takes the client id as parameter to delete.
+* the DELETE route takes the client id as part of request params as in the PUT request but doesnt take any other parameter
