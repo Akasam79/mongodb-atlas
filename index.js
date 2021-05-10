@@ -39,7 +39,10 @@ app.get("/clients", (req, res) => {
     if (err) {
       return res.status(500).json({ message: "Internal Server error" });
     } else {
-      return res.status(200).json({ message: result });
+      return res.status(200).json({
+        message: "Client's details retrieved without error",
+        data: result,
+      });
     }
   });
 });
@@ -72,7 +75,11 @@ app.put(path, (req, res) => {
   var id = req.params.id;
   Client.findByIdAndUpdate(id, clientUpdates, (err, result) => {
     if (err) return res.status(500).json({ message: "Internal Server error" });
-    return res.status(200).json({ message: "Data updated sucessfully" });
+    return res.status(200).json({
+      message:
+        result.name + "'s details has been updated in database successfully",
+      data: result[0],
+    });
   });
 });
 
@@ -80,7 +87,10 @@ app.delete(path, (req, res) => {
   var id = req.params.id;
   Client.findByIdAndDelete(id, (err, result) => {
     if (err) return res.status(500).json({ message: "Internal server error" });
-    return res.status(200).json({ message: "Client deleted sucessfully" });
+    return res.status(200).json({
+      message:
+        result.name + "'s details has been deleted from database sucessfully",
+    });
   });
 });
 
