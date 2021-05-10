@@ -34,7 +34,7 @@ const Client = mongoose.model("Client", ClientSchema);
 
 app.use(express.json());
 
-app.get("/client", (req, res) => {
+app.get("/clients", (req, res) => {
   Client.find({}, (err, result) => {
     if (err) {
       return res.status(500).json({ message: "Internal Server error" });
