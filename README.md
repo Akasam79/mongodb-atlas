@@ -15,10 +15,8 @@
 
 
 
-
 ### The POST route takes in name, email and country as parameter to be sent in the format as given below
 * format for POST request
-# code block 
 {
     "name": "client's_name",
     "email": "client's_email",
