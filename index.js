@@ -46,6 +46,20 @@ app.get("/clients", (req, res) => {
     }
   });
 });
+app.get("/clients/:id", (req, res) => {
+  Client.findById({ _id: req.params.id }, (err, result) => {
+    if (err) {
+      return res.status(500).json({ message: "Internal Server error" });
+    } else if (!result) {
+      return res.status(404).json({ message: "client detail not found" });
+    } else {
+      return res.status(200).json({
+        message: "Client's details retrieved without error",
+        data: result,
+      });
+    }
+  });
+});
 
 app.post("/", (req, res) => {
   Client.insertMany(
@@ -55,11 +69,13 @@ app.post("/", (req, res) => {
       country: req.body.country,
     },
     (err, result) => {
-      if (err)
+      if (err) {
         return res.status(500).json({ message: "Internal Server error" });
-      return res
-        .status(200)
-        .json({ message: "New client added successfully", data: result[0] });
+      } else {
+        return res
+          .status(200)
+          .json({ message: "New client added successfully", data: result[0] });
+      }
     }
   );
 });
@@ -74,23 +90,33 @@ app.put(path, (req, res) => {
 
   var id = req.params.id;
   Client.findByIdAndUpdate(id, clientUpdates, (err, result) => {
-    if (err) return res.status(500).json({ message: "Internal Server error" });
-    return res.status(200).json({
-      message:
-        result.name + "'s details has been updated in database successfully",
-      data: result[0],
-    });
+    if (err) {
+      return res.status(500).json({ message: "Internal Server error" });
+    } else if (!result) {
+      return res.status(404).json({ message: "client detail not found" });
+    } else {
+      res.status(200).json({
+        message:
+          result.name + "'s details has been updated in database successfully",
+        data: result[0],
+      });
+    }
   });
 });
 
 app.delete(path, (req, res) => {
   var id = req.params.id;
   Client.findByIdAndDelete(id, (err, result) => {
-    if (err) return res.status(500).json({ message: "Internal server error" });
-    return res.status(200).json({
-      message:
-        result.name + "'s details has been deleted from database sucessfully",
-    });
+    if (err) {
+      return res.status(500).json({ message: "Internal Server error" });
+    } else if (!result) {
+      return res.status(404).json({ message: "client detail not found" });
+    } else {
+      res.status(200).json({
+        message:
+          result.name + "'s details has been deleted from database sucessfully",
+      });
+    }
   });
 });
 
