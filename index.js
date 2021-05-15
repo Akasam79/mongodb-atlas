@@ -26,7 +26,12 @@ mongoose.connect(
 
 const ClientSchema = new Schema({
   name: String,
-  email: String,
+  email: {
+    type: String,
+    required: true,
+    match: /.+\@.+\..+/,
+    unique: true,
+  },
   country: String,
 });
 
@@ -69,6 +74,9 @@ app.post("/", (req, res) => {
       country: req.body.country,
     },
     (err, result) => {
+      if (!req.body.email.unique) {
+        return res.status(409).json({ message: "email already exists" });
+      }
       if (err) {
         return res.status(500).json({ message: "Internal Server error" });
       } else {
@@ -115,6 +123,7 @@ app.delete(path, (req, res) => {
       res.status(200).json({
         message:
           result.name + "'s details has been deleted from database sucessfully",
+        data: result,
       });
     }
   });
