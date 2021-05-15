@@ -28,9 +28,19 @@ const ClientSchema = new Schema({
   name: String,
   email: {
     type: String,
-    required: true,
-    match: /.+\@.+\..+/,
-    unique: true,
+    // validate: {
+    //   validator: async function (email) {
+    //     const user = await this.constructor.findOne({ email });
+    //     if (user) {
+    //       if (this.id === user.id) {
+    //         return true;
+    //       }
+    //       return false;
+    //     }
+    //     return true;
+    //   },
+    // },
+    required: [true, "User email required"],
   },
   country: String,
 });
@@ -74,9 +84,6 @@ app.post("/", (req, res) => {
       country: req.body.country,
     },
     (err, result) => {
-      if (!req.body.email.unique) {
-        return res.status(409).json({ message: "email already exists" });
-      }
       if (err) {
         return res.status(500).json({ message: "Internal Server error" });
       } else {
@@ -106,7 +113,7 @@ app.put(path, (req, res) => {
       res.status(200).json({
         message:
           result.name + "'s details has been updated in database successfully",
-        data: result[0],
+        data: result,
       });
     }
   });
