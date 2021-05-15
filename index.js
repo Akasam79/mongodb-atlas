@@ -28,18 +28,18 @@ const ClientSchema = new Schema({
   name: String,
   email: {
     type: String,
-    // validate: {
-    //   validator: async function (email) {
-    //     const user = await this.constructor.findOne({ email });
-    //     if (user) {
-    //       if (this.id === user.id) {
-    //         return true;
-    //       }
-    //       return false;
-    //     }
-    //     return true;
-    //   },
-    // },
+    validate: {
+      validator: async function (email) {
+        const user = await this.constructor.findOne({ email });
+        if (user) {
+          if (this.id === Client.id) {
+            return true;
+          }
+          return false;
+        }
+        return true;
+      },
+    },
     required: [true, "User email required"],
   },
   country: String,
@@ -85,7 +85,9 @@ app.post("/", (req, res) => {
     },
     (err, result) => {
       if (err) {
-        return res.status(500).json({ message: "Internal Server error" });
+        return res
+          .status(409)
+          .json({ message: "the email entered already exists" });
       } else {
         return res
           .status(200)
